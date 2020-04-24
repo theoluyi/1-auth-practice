@@ -19,11 +19,16 @@ class App extends React.Component {
   }
 
   handleResponse = (resp) => {
-    console.log(resp)
     if (resp.user) {
-      this.setState({user: resp.user})
+      console.log(resp)
+      localStorage.token = resp.token
+      this.setState(resp, () => {
+        this.props.history.push("/profile")
+      })
     }
-    // else {return resp.error}
+    else { 
+      alert(resp.error)
+    }
   }
 
   componentDidMount() {
